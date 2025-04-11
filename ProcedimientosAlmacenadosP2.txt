@@ -57,3 +57,33 @@ BEGIN
 		set @mensaje='Ya existe un Usuario registrado con este correo'
 END
 END
+
+--procedimiento para insertar datos en tabla Ligas
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarLigas
+	@nombre VARCHAR (20),
+	@descripcion VARCHAR (200),
+	@correoE VARCHAR (320),
+	@telefono VARCHAR (10),
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Ligas where nombre=@nombre ))
+	begin
+	INSERT INTO Ligas(nombre, descripcion,correoE,telefono)
+		VALUES (@nombre,@descripcion,@correoE,@telefono);
+		SET @registrado=1
+		SET @mensaje= 'Liga Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe una Liga registrada con este correo'
+END
+END
