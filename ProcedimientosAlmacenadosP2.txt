@@ -1,0 +1,8 @@
+
+//procedimiento para insertar datos en tabla tipo Usuarios
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertar
