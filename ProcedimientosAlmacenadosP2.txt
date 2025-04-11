@@ -84,7 +84,7 @@ END
 ELSE
 BEGIN 
 		set @Registrado=0
-		set @mensaje='Ya existe una Liga registrada con este correo'
+		set @mensaje='Ya existe una Liga registrada con este nombre'
 END
 END
 
@@ -116,6 +116,38 @@ END
 ELSE
 BEGIN 
 		set @Registrado=0
-		set @mensaje='Ya existe un campeonato registrado con este correo'
+		set @mensaje='Ya existe un campeonato registrado con este nombre'
+END
+END
+
+--procedimiento para insertar datos en tabla TipoSanciones
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarTipoSanciones
+	@nombre VARCHAR (25),
+	@descripcion VARCHAR(100),
+	@tiempo int,
+	@valor int,
+	@estado binary,
+	@idLiga int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from TipoSanciones where nombre=@nombre ))
+	begin
+	INSERT INTO TipoSanciones(nombre,descripcion,tiempo, valor, estado, idLiga)
+		VALUES (@nombre,@descripcion,@tiempo, @valor, @estado, @idLiga);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe tipo de sancion con este nombre'
 END
 END
