@@ -87,3 +87,35 @@ BEGIN
 		set @mensaje='Ya existe una Liga registrada con este correo'
 END
 END
+
+--procedimiento para insertar datos en tabla Campeonatos
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarCampeonatos
+	@nombre VARCHAR (20),
+	@fechaInicio date,
+	@fechaCierre date,
+	@numeroEquiposP int, 
+	@activo binary,
+	idLiga int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Compeonatos where nombre=@nombre ))
+	begin
+	INSERT INTO Compeonatos(nombre, fechaInicio,fechaCierre,numeroEquiposP,activo, idLiga)
+		VALUES (@nombre,@fechaInicio,@fechaCierre,@numeroEquiposP,@activo,@idLiga);
+		SET @registrado=1
+		SET @mensaje= 'Campeonato Ingresado con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe un campeonato registrado con este correo'
+END
+END
