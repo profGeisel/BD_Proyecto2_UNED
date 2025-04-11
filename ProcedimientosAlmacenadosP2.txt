@@ -5,4 +5,23 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertar
+CREATE PROCEDURE spInsertarTipoUsuarios
+	@tipoUsuarios VARCHAR (25),
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from TipoUsuarios where nombre=@nombre))
+	begin
+	INSERT INTO TipoUsuarios(nombre)
+		VALUES (@nombre);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Usuario Ingresado con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe un Tipo de Usuario con este nombre'
+END
+END
