@@ -151,3 +151,39 @@ BEGIN
 		set @mensaje='Ya existe tipo de sancion con este nombre'
 END
 END
+
+--procedimiento para insertar datos en tabla Equipos
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarEquipos
+	@nombre VARCHAR (20),
+	@logo varbinary,
+	@correoE varchar(320),
+	@lugar varchar(20),
+	@capitan varchar(100),
+	@fechaFundacion date,
+	@descripcion varchar (200),
+	@numIdentificacion varchar(12),
+	@idCampeonato int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Equipos where numIdentificacion=@numIdentificacion ))
+	begin
+	INSERT INTO Equipos(nombre,logo,correoE, lugar, capitan, fechaFundacion, descripcion,numIdentificacion)
+		VALUES (@nombre,@logo,@correoE, @lugar, @capitan, @fechaFundacion, @descripcion,@numIdentificacion);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe tipo de sancion con este nombre'
+END
+END
+
