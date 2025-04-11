@@ -187,3 +187,37 @@ BEGIN
 END
 END
 
+--procedimiento para insertar datos en tabla Jugadores
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarJugadores
+	@nombre VARCHAR (20),
+	@apellidoP varchar (20),
+	@apellidoM varchar (20),
+	@foto varbinary,
+	@numeroCamisa int, 
+	@fechaNacimiento date,
+	@edad int, 
+	@cedula varchar (10),
+	@idEquipo int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Jugadores where cedula=@cedula ))
+	begin
+	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
+		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe tipo de sancion con este nombre'
+END
+END
