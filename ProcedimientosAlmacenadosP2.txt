@@ -220,4 +220,61 @@ BEGIN
 		set @Registrado=0
 		set @mensaje='Ya existe tipo de sancion con este nombre'
 END
+<<<<<<< Updated upstream
 END
+=======
+END
+
+
+--procedimiento para insertar datos en tabla Sanciones
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spInsertarSanciones
+	@activa binary,
+	@idJugador int,
+	@idEquipo int,
+	@idCampeonato int,
+	@idTipoS,
+	)
+AS
+BEGIN
+
+	INSERT INTO Sanciones(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
+		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
+		
+END
+
+--procedimiento para insertar datos en tabla eventos
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarEventos
+	@nombre VARCHAR (20),
+	@fecha date,
+	@hora time,
+	@equipoVisitante int,
+	@equipoResidente int,
+	@idCampeonato int, 
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Eventos where nombre=@nombre ))
+	begin
+	INSERT INTO Eventos(nombre,fecha, hora, equipoVisitante,equipoResidente,idCampeonato)
+		VALUES (@nombre,@fecha, @hora, @equipoVisitante,@equipoResidente,@idCampeonato);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe tipo de sancion con este nombre'
+END
+END
+>>>>>>> Stashed changes
