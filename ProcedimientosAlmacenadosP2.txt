@@ -220,9 +220,6 @@ BEGIN
 		set @Registrado=0
 		set @mensaje='Ya existe tipo de sancion con este nombre'
 END
-<<<<<<< Updated upstream
-END
-=======
 END
 
 
@@ -277,4 +274,4 @@ BEGIN
 		set @mensaje='Ya existe tipo de sancion con este nombre'
 END
 END
->>>>>>> Stashed changes
+
