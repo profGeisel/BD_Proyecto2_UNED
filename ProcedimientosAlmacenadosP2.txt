@@ -1,5 +1,5 @@
 
-//procedimiento para insertar datos en tabla tipo Usuarios
+--procedimiento para insertar datos en tabla tipo Usuarios
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,5 +23,37 @@ ELSE
 BEGIN 
 		set @Registrado=0
 		set @mensaje='Ya existe un Tipo de Usuario con este nombre'
+END
+END
+
+--procedimiento para insertar datos en tabla Usuarios
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarUsuarios
+	@nombre VARCHAR (20),
+	@apellidoP VARCHAR (20),
+	@apellidoM VARCHAR (20),
+	@correoE VARCHAR (320),
+	@contrasena VARCHAR (100),
+	@idTipoUsuario int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Usuarios where correoE=@correoE ))
+	begin
+	INSERT INTO Usuarios(nombre, apellidoP,apellidoM,correoE,contrasena,idTipoUsuario)
+		VALUES (@nombre,@apellidoP,@apellidoM,@correoE,@contrasena,@idTipoUsuario);
+		SET @registrado=1
+		SET @mensaje= 'Usuario Ingresado con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe un Usuario registrado con este correo'
 END
 END
