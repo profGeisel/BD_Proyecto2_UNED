@@ -140,8 +140,8 @@ AS
 BEGIN
 if(not exists(select * from TipoSanciones where nombre=@nombre ))
 	begin
-	INSERT INTO TipoSanciones(nombre,descripcion,tiempo, valor, estado, idLiga)
-		VALUES (@nombre,@descripcion,@tiempo, @valor, @estado, @idLiga);
+	INSERT INTO TipoSanciones(nombre,descripcion,tiempo,valor,estado,idLiga)
+		VALUES (@nombre,@descripcion,@tiempo,@valor,@estado,@idLiga);
 		SET @registrado=1
 		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
 END
