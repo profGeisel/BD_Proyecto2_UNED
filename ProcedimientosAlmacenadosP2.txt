@@ -275,3 +275,65 @@ BEGIN
 END
 END
 
+--procedimiento para insertar datos en tabla Entrenadores
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarEntrenadores
+	@nombre VARCHAR (20),
+	@apellidoP varchar(20),
+	@apellidoM varchar(20),
+	@foto varbinary,
+	@fechaNacimiento date, 
+	@correoE varchar(320),
+	@cedula varchar(10),
+	@idEquipo int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+if(not exists(select * from Entrenadores where cedula=@cedula ))
+	begin
+	INSERT INTO Entrenadores(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
+		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+ELSE
+BEGIN 
+		set @Registrado=0
+		set @mensaje='Ya existe tipo de sancion con este nombre'
+END
+END
+
+--procedimiento para insertar datos en tabla Resultados
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarResultados
+	@idEquipo int,
+	@idEvento int,
+	@ triunfos int,
+	@empates int,
+	@derrotas int,
+	@juegos int,
+	@golesFavor int,
+	@golesContra int,
+	@diferenciaGoles int,
+	@registrado bit output,
+	@mensaje varchar(80) output
+	)
+AS
+BEGIN
+
+	INSERT INTO Resultados(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
+		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
+		SET @registrado=1
+		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+END
+
