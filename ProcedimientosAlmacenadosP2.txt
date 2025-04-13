@@ -330,10 +330,8 @@ CREATE PROCEDURE spInsertarResultados
 	)
 AS
 BEGIN
-
 	INSERT INTO Resultados(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
 		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-
+END
