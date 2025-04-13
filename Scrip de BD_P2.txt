@@ -4,17 +4,23 @@ use BDLigasFutbol;
 
 create table tipoUsuarios (id int primary key IDENTITY(1,1),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 nombre varchar(25) not null);
 
 create table usuarios (id int primary key IDENTITY(1,1), 
 nombre varchar(20)not null, apellidoP varchar(20), apellidoM varchar(20), 
 correoE varchar(320)not null, contraseña varchar(100) not null, idTipoUsuario int not null,
 =======
+=======
+>>>>>>> Stashed changes
 nombre varchar(25) not null unique);
 
 create table usuarios (id int primary key IDENTITY(1,1), 
 nombre varchar(20)not null, apellidoP varchar(20), apellidoM varchar(20), 
 correoE varchar(320)not null, contrasena varchar(100) not null, idTipoUsuario int not null,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 constraint fk_UsuTip foreign key(idTipoUsuario) references TipoUsuarios(id));
 
@@ -22,9 +28,15 @@ create table Ligas (id int primary key IDENTITY(1,1), nombre varchar(20) not nul
 descripcion varchar(200) not null, correoE varchar(320) not null, telefono varchar(10) not null);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null, 
 fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
 activo bit not null, idLiga int not null, 
+=======
+create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
+fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
+activo binary not null, idLiga int not null, 
+>>>>>>> Stashed changes
 =======
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
 fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
@@ -35,7 +47,11 @@ constraint fk_CamLig foreign key(idLiga) references Ligas(id));
 
 create table TipoSanciones (id int primary key IDENTITY (1,1), 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 nombre varchar(25) not null, descripcion varchar(100) not null, 
+=======
+nombre varchar(25) not null unique, descripcion varchar(100) not null, 
+>>>>>>> Stashed changes
 =======
 nombre varchar(25) not null unique, descripcion varchar(100) not null, 
 >>>>>>> Stashed changes
@@ -46,7 +62,11 @@ create table equipos (id int primary key IDENTITY(1,1),
 nombre varchar(20) not null, logo varbinary , correoE varchar(320) not null, lugar varchar (20) not null, 
 capitan varchar(100) not null, fechaFundacion date not null, descripcion varchar(200), 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 numIdentificacion varchar(12) not null, idCampeonato int not null,
+=======
+numIdentificacion varchar(12) not null unique, idCampeonato int not null,
+>>>>>>> Stashed changes
 =======
 numIdentificacion varchar(12) not null unique, idCampeonato int not null,
 >>>>>>> Stashed changes
@@ -59,7 +79,11 @@ edad int not null, cedula varchar(10) not null, idEquipo int not null,
 constraint fk_JugEqu foreign key(idEquipo) references Equipos(id));
 
 create table Sanciones (id int primary key identity (1,1), 
+<<<<<<< Updated upstream
 activa binary not null, idJugador int not null, idEquipo int not null,
+=======
+activa binary not null, idJugador int , idEquipo int ,
+>>>>>>> Stashed changes
 idCampeonato int not null, idTipoS int not null,
 constraint fk_SanJug foreign key(idJugador) references Jugadores(id),
 constraint fk_SanEqu foreign key(idEquipo) references Equipos(id),
@@ -67,7 +91,11 @@ constraint fk_SanCam foreign key(idCampeonato) references Campeonatos(id),
 constraint fk_SanTip foreign key(idTipoS) references TipoSanciones(id));
 
 create table Eventos(id int primary key identity (1,1), 
+<<<<<<< Updated upstream
 nombre varchar(20) not null, fecha date not null, hora time not null, 
+=======
+nombre varchar(20) not null unique, fecha date not null, hora time not null, 
+>>>>>>> Stashed changes
 equipoVisitante int not null,equipoResidente int not null, idCampeonato int not null,
 constraint fk_EveEqu foreign key(equipoVisitante) references Equipos(id),
 constraint fk_EveEqu1 foreign key(equipoResidente) references Equipos(id),
