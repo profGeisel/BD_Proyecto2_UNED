@@ -661,3 +661,168 @@ BEGIN
 	
 	WHERE id=@id;
 END
+
+
+---PROCEDIMIENTOS ALMACENADOS PARA ELIMINAR REGISTROS DE LAS TABLAS
+--Procedimiento para Eliminar Usuario
+CREATE PROCEDURE spEliminarUsuarios
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla usarios
+-- ========================================================
+BEGIN
+
+	DELETE Usuarios WHERE id=@id;
+END
+
+--Procedimiento para Eliminar TipoUsuarios
+CREATE PROCEDURE spEliminarUsuarios
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla TipoUsuarios
+-- ========================================================
+BEGIN
+
+	DELETE TipoUsuarios WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Entrenadores
+CREATE PROCEDURE spEliminarEntrenadores
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Entrenadores
+-- ========================================================
+BEGIN
+
+	DELETE Entrenadores WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Equipos
+CREATE PROCEDURE spEliminarUsuarios
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Equipos
+-- ========================================================
+BEGIN
+
+	DELETE Equipos WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Resultados
+CREATE PROCEDURE spEliminarResultados
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Resultados
+-- ========================================================
+BEGIN
+
+	DELETE Resultados WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Eventos
+CREATE PROCEDURE spEliminarEventos
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Eventos
+-- ========================================================
+BEGIN
+
+	DELETE Eventos WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Sanciones
+CREATE PROCEDURE spEliminarSanciones
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la Sanciones
+-- ========================================================
+BEGIN
+
+	DELETE Sanciones WHERE id=@id;
+END
+
+--Procedimiento para Eliminar TipoSanciones
+CREATE PROCEDURE spEliminarSanciones
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla tipo Sanciones
+-- ========================================================
+BEGIN
+
+	DELETE TipoSanciones WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Jugadores
+CREATE PROCEDURE spEliminarJugadores
+	@id
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Jugadores
+-- ========================================================
+BEGIN
+
+	DELETE Jugadores WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Ligas
+CREATE PROCEDURE spEliminarLigas
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla Ligas
+-- ========================================================
+BEGIN
+
+	DELETE Ligas WHERE id=@id;
+END
+
+--Procedimiento para Eliminar Campeonatos
+CREATE PROCEDURE spEliminarCampeonatos
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla campeonatos
+-- ========================================================
+BEGIN
+
+	DELETE Campeonatos WHERE id=@id;
+END
