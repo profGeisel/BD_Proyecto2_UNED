@@ -1032,3 +1032,24 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM Campeonatos
 END
+
+
+
+--Procedimiento para Validar Usuarios
+CREATE PROCEDURE spValidarUsuarios(
+	@correoE VARCHAR (320),
+	@contrasena VARCHAR (100)
+	
+	)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	if(exists(select * from Usuarios where correoE=@correoE and contrasena=@contrasena))
+	select id from Usuarios where correoE=@correoE and contrasena=@contrasena
+	else 
+	select '0'
+	end
