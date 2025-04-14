@@ -6,11 +6,6 @@ create table tipoUsuarios (id int primary key IDENTITY(1,1),
 nombre varchar(25) not null);
 
 create table usuarios (id int primary key IDENTITY(1,1), 
-nombre varchar(25)not null unique, apellidoP varchar(20), apellidoM varchar(20), 
-correoE varchar(320)not null, contraseña varchar(100) not null, idTipoUsuario int not null,
-
-
-create table usuarios (id int primary key IDENTITY(1,1), 
 nombre varchar(20)not null, apellidoP varchar(20), apellidoM varchar(20), 
 correoE varchar(320)not null, contrasena varchar(100) not null, idTipoUsuario int not null,
 constraint fk_UsuTip foreign key(idTipoUsuario) references TipoUsuarios(id));
