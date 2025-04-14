@@ -826,3 +826,209 @@ BEGIN
 
 	DELETE Campeonatos WHERE id=@id;
 END
+
+
+---PROCEDIMIETOS PARA CONSULTAS
+---Procedimiento almacenado para la seleccion de datos de la tabla usuarios 
+CREATE PROCEDURE spGetUsuarios
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Usuarios
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios 
+CREATE PROCEDURE spGetTipoUsuarios
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM TipoUsuarios
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Entrenadores
+CREATE PROCEDURE spGetEntrenadores
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Entrenadores
+END
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Resultados
+CREATE PROCEDURE spGetResultados
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Resultados
+END
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Equipos
+CREATE PROCEDURE spGetEquipos
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Equipos
+END
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Jugadores
+CREATE PROCEDURE spGetJugadores
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Jugadores
+END
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Eventos
+CREATE PROCEDURE spGetEventos
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Eventos
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Sanciones
+CREATE PROCEDURE spGetSanciones
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Sanciones
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla TipoSanciones
+CREATE PROCEDURE spGetTipoSanciones
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM TipoSanciones
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Ligas
+CREATE PROCEDURE spGetLigas
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Ligas
+END
+
+
+---Procedimiento almacenado para la seleccion de datos de la tabla Campeonatos
+CREATE PROCEDURE spGetCampeonatos
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Campeonatos
+END
