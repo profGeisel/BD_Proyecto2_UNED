@@ -324,9 +324,7 @@ CREATE PROCEDURE spInsertarResultados(
 	@juegos int,
 	@golesFavor int,
 	@golesContra int,
-	@diferenciaGoles int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@diferenciaGoles int
 	)
 AS
 BEGIN
@@ -406,7 +404,7 @@ AS
 -- ====================================================
 BEGIN
 
-	UPDATE Entrenadores SET nombre=nombre
+	UPDATE Entrenadores SET nombre=nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	foto=@foto,
@@ -567,7 +565,6 @@ AS
 BEGIN
 
 	UPDATE Jugadores SET nombre=@nombre,
-	nombre=@nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	foto=@foto,
