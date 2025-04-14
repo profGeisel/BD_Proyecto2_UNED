@@ -2,10 +2,10 @@ Create Database BDLigasFutbol
 
 use BDLigasFutbol;
 
-create table tipoUsuarios (id int primary key IDENTITY(1,1),
+create table TipoUsuarios (id int primary key IDENTITY(1,1),
 nombre varchar(25) not null);
 
-create table usuarios (id int primary key IDENTITY(1,1), 
+create table Usuarios (id int primary key IDENTITY(1,1), 
 nombre varchar(20)not null, apellidoP varchar(20), apellidoM varchar(20), 
 correoE varchar(320)not null, contrasena varchar(100) not null, idTipoUsuario int not null,
 constraint fk_UsuTip foreign key(idTipoUsuario) references TipoUsuarios(id));
@@ -25,13 +25,13 @@ nombre varchar(25) not null unique, descripcion varchar(100) not null,
 tiempo int not null, valor int not null, estado binary not null,
 idLiga int not null,constraint fk_TipLig foreign key(idLiga) references Ligas(id));
 
-create table equipos (id int primary key IDENTITY(1,1), 
+create table Equipos (id int primary key IDENTITY(1,1), 
 nombre varchar(20) not null, logo varbinary , correoE varchar(320) not null, lugar varchar (20) not null, 
 capitan varchar(100) not null, fechaFundacion date not null, descripcion varchar(200), 
 numIdentificacion varchar(12) not null unique, idCampeonato int not null,
 constraint fk_EquCam foreign key(idCampeonato) references Campeonatos(id));
 
-create table jugadores (id int primary key IDENTITY(1,1), 
+create table Jugadores (id int primary key IDENTITY(1,1), 
 nombre varchar(20) not null, apellidoP varchar(20) , apellidoM varchar(20) , 
 foto varbinary , numeroCamisa int not null, fechaNacimiento date not null, 
 edad int not null, cedula varchar(10) not null, idEquipo int not null,
