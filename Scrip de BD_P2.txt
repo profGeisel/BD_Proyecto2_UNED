@@ -63,5 +63,5 @@ idEquipo int not null , idEvento int not null, triufos int not null,
 empates int not null, derrotas int not null, juegos int not null, 
 golesFavor int not null,golesContra int, diferenciaGoles int,
 constraint fk_ResEqu foreign key(idEquipo) references Equipos(id),
-constraint fk_ResEve foreign key(idEvento) references Eventos(id);
+constraint fk_ResEve foreign key(idEvento) references Eventos(id));
 
