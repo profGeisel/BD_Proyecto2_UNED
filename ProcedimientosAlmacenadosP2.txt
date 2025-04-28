@@ -7,24 +7,17 @@ GO
 
 CREATE PROCEDURE spInsertarTipoUsuarios(
 	@nombre VARCHAR (25),
-	@registrado bit output,
-	@mensaje varchar(80) output
-	)
+		)
 AS
 BEGIN
-if(not exists(select * from TipoUsuarios where nombre=@nombre))
-	begin
+
 	INSERT INTO TipoUsuarios(nombre)
 		VALUES (@nombre);
 		SET @registrado=1
 		SET @mensaje= 'Tipo de Usuario Ingresado con Exito'
+
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un Tipo de Usuario con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Usuarios
 SET ANSI_NULLS ON
@@ -38,25 +31,16 @@ CREATE PROCEDURE spInsertarUsuarios(
 	@apellidoM VARCHAR (20),
 	@correoE VARCHAR (320),
 	@contrasena VARCHAR (100),
-	@idTipoUsuario int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idTipoUsuario int
 	)
 AS
 BEGIN
-if(not exists(select * from Usuarios where correoE=@correoE ))
-	begin
+
 	INSERT INTO Usuarios(nombre, apellidoP,apellidoM,correoE,contrasena,idTipoUsuario)
 		VALUES (@nombre,@apellidoP,@apellidoM,@correoE,@contrasena,@idTipoUsuario);
-		SET @registrado=1
-		SET @mensaje= 'Usuario Ingresado con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un Usuario registrado con este correo'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Ligas
 SET ANSI_NULLS ON
@@ -69,24 +53,16 @@ CREATE PROCEDURE spInsertarLigas(
 	@descripcion VARCHAR (200),
 	@correoE VARCHAR (320),
 	@telefono VARCHAR (10),
-	@registrado bit output,
-	@mensaje varchar(80) output
+	
 	)
 AS
 BEGIN
-if(not exists(select * from Ligas where nombre=@nombre ))
-	begin
+
 	INSERT INTO Ligas(nombre, descripcion,correoE,telefono)
 		VALUES (@nombre,@descripcion,@correoE,@telefono);
-		SET @registrado=1
-		SET @mensaje= 'Liga Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe una Liga registrada con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Campeonatos
 SET ANSI_NULLS ON
@@ -100,25 +76,16 @@ CREATE PROCEDURE spInsertarCampeonatos(
 	@fechaCierre date,
 	@numeroEquiposP int, 
 	@activo binary,
-	@idLiga int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idLiga int
 	)
 AS
 BEGIN
-if(not exists(select * from Campeonatos where nombre=@nombre ))
-	begin
+
 	INSERT INTO Campeonatos(nombre, fechaInicio,fechaCierre,numeroEquiposP,activo, idLiga)
 		VALUES (@nombre,@fechaInicio,@fechaCierre,@numeroEquiposP,@activo,@idLiga);
-		SET @registrado=1
-		SET @mensaje= 'Campeonato Ingresado con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un campeonato registrado con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla TipoSanciones
 SET ANSI_NULLS ON
@@ -132,25 +99,16 @@ CREATE PROCEDURE spInsertarTipoSanciones(
 	@tiempo int,
 	@valor int,
 	@estado binary,
-	@idLiga int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idLiga int
 	)
 AS
 BEGIN
-if(not exists(select * from TipoSanciones where nombre=@nombre ))
-	begin
+
 	INSERT INTO TipoSanciones(nombre,descripcion,tiempo,valor,estado,idLiga)
 		VALUES (@nombre,@descripcion,@tiempo,@valor,@estado,@idLiga);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Equipos
 SET ANSI_NULLS ON
@@ -167,25 +125,15 @@ CREATE PROCEDURE spInsertarEquipos(
 	@fechaFundacion date,
 	@descripcion varchar (200),
 	@numIdentificacion varchar(12),
-	@idCampeonato int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idCampeonato int
 	)
 AS
 BEGIN
-if(not exists(select * from Equipos where numIdentificacion=@numIdentificacion ))
-	begin
 	INSERT INTO Equipos(nombre,logo,correoE, lugar, capitan, fechaFundacion, descripcion,numIdentificacion)
 		VALUES (@nombre,@logo,@correoE, @lugar, @capitan, @fechaFundacion, @descripcion,@numIdentificacion);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Jugadores
 SET ANSI_NULLS ON
@@ -202,25 +150,16 @@ CREATE PROCEDURE spInsertarJugadores(
 	@fechaNacimiento date,
 	@edad int, 
 	@cedula varchar (10),
-	@idEquipo int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idEquipo int
 	)
 AS
 BEGIN
-if(not exists(select * from Jugadores where cedula=@cedula ))
-	begin
+
 	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
 		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 
 --procedimiento para insertar datos en tabla Sanciones
@@ -255,24 +194,14 @@ CREATE PROCEDURE spInsertarEventos(
 	@hora time,
 	@equipoVisitante int,
 	@equipoResidente int,
-	@idCampeonato int, 
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idCampeonato int
 	)
 AS
 BEGIN
-if(not exists(select * from Eventos where nombre=@nombre ))
-	begin
+
 	INSERT INTO Eventos(nombre,fecha, hora, equipoVisitante,equipoResidente,idCampeonato)
 		VALUES (@nombre,@fecha, @hora, @equipoVisitante,@equipoResidente,@idCampeonato);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
-END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
+		
 END
 
 --procedimiento para insertar datos en tabla Entrenadores
@@ -289,24 +218,15 @@ CREATE PROCEDURE spInsertarEntrenadores(
 	@fechaNacimiento date, 
 	@correoE varchar(320),
 	@cedula varchar(10),
-	@idEquipo int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idEquipo int
+	
 	)
 AS
 BEGIN
-if(not exists(select * from Entrenadores where cedula=@cedula ))
-	begin
+
 	INSERT INTO Entrenadores(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
 		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
-END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
+		
 END
 
 --procedimiento para insertar datos en tabla Resultados
@@ -332,7 +252,7 @@ BEGIN
 		VALUES (@idEquipo,@idEvento,@triunfos,@empates,@derrotas,@juegos,@golesFavor,@golesContra,@diferenciaGoles);
 		
 END
-END
+
 
 
 ---PROCEDIMIENTOS ALMACENADOS PARA ACTUALIZAR TABLAS
@@ -850,6 +770,23 @@ BEGIN
 	SELECT * FROM Usuarios
 END
 
+---Procedimiento almacenado para la seleccion de datos de la tabla usuarios segun id
+CREATE PROCEDURE spGetUsuario
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Usuarios where id=@id
+END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios 
 CREATE PROCEDURE spGetTipoUsuarios
@@ -869,6 +806,23 @@ BEGIN
 	SELECT * FROM TipoUsuarios
 END
 
+---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios segun id
+CREATE PROCEDURE spGetTipoUsuario
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM TipoUsuarios where id=@id
+END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla Entrenadores
 CREATE PROCEDURE spGetEntrenadores
