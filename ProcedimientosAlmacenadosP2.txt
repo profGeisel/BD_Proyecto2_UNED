@@ -5,26 +5,40 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarTipoUsuarios
-	@tipoUsuarios VARCHAR (25),
-	@registrado bit output,
-	@mensaje varchar(80) output
-	)
+CREATE PROCEDURE spInsertarTipoUsuarios(
+	@nombre VARCHAR (25),
+		)
 AS
 BEGIN
-if(not exists(select * from TipoUsuarios where nombre=@nombre))
-	begin
+
 	INSERT INTO TipoUsuarios(nombre)
 		VALUES (@nombre);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Usuario Ingresado con Exito'
+		
+
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un Tipo de Usuario con este nombre'
+
+--procedimiento para insertar datos en tabla tipo Usuarios
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarResultadosIndividuales(
+	@fecha date,
+	@idJugador int,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+		)
+AS
+BEGIN
+
+	INSERT INTO ResultadosIndividuales(fecha idJugador, cantidadGoles, asistencias,tRojas, tAmarillas)
+		VALUES (@fecha, @idJugador, @cantidadGoles, @asistencias,@tRojas, @tAmarillas);
+		
 END
-END
+
 
 --procedimiento para insertar datos en tabla Usuarios
 SET ANSI_NULLS ON
@@ -32,31 +46,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarUsuarios
+CREATE PROCEDURE spInsertarUsuarios(
 	@nombre VARCHAR (20),
 	@apellidoP VARCHAR (20),
 	@apellidoM VARCHAR (20),
 	@correoE VARCHAR (320),
 	@contrasena VARCHAR (100),
-	@idTipoUsuario int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idTipoUsuario int
 	)
 AS
 BEGIN
-if(not exists(select * from Usuarios where correoE=@correoE ))
-	begin
+
 	INSERT INTO Usuarios(nombre, apellidoP,apellidoM,correoE,contrasena,idTipoUsuario)
 		VALUES (@nombre,@apellidoP,@apellidoM,@correoE,@contrasena,@idTipoUsuario);
-		SET @registrado=1
-		SET @mensaje= 'Usuario Ingresado con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un Usuario registrado con este correo'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Ligas
 SET ANSI_NULLS ON
@@ -64,29 +69,21 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarLigas
+CREATE PROCEDURE spInsertarLigas(
 	@nombre VARCHAR (20),
 	@descripcion VARCHAR (200),
 	@correoE VARCHAR (320),
 	@telefono VARCHAR (10),
-	@registrado bit output,
-	@mensaje varchar(80) output
+	
 	)
 AS
 BEGIN
-if(not exists(select * from Ligas where nombre=@nombre ))
-	begin
+
 	INSERT INTO Ligas(nombre, descripcion,correoE,telefono)
 		VALUES (@nombre,@descripcion,@correoE,@telefono);
-		SET @registrado=1
-		SET @mensaje= 'Liga Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe una Liga registrada con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Campeonatos
 SET ANSI_NULLS ON
@@ -94,31 +91,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarCampeonatos
+CREATE PROCEDURE spInsertarCampeonatos(
 	@nombre VARCHAR (20),
 	@fechaInicio date,
 	@fechaCierre date,
 	@numeroEquiposP int, 
 	@activo binary,
-	idLiga int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idLiga int
 	)
 AS
 BEGIN
-if(not exists(select * from Compeonatos where nombre=@nombre ))
-	begin
-	INSERT INTO Compeonatos(nombre, fechaInicio,fechaCierre,numeroEquiposP,activo, idLiga)
+
+	INSERT INTO Campeonatos(nombre, fechaInicio,fechaCierre,numeroEquiposP,activo, idLiga)
 		VALUES (@nombre,@fechaInicio,@fechaCierre,@numeroEquiposP,@activo,@idLiga);
-		SET @registrado=1
-		SET @mensaje= 'Campeonato Ingresado con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe un campeonato registrado con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla TipoSanciones
 SET ANSI_NULLS ON
@@ -126,31 +114,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarTipoSanciones
+CREATE PROCEDURE spInsertarTipoSanciones(
 	@nombre VARCHAR (25),
 	@descripcion VARCHAR(100),
 	@tiempo int,
 	@valor int,
 	@estado binary,
-	@idLiga int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idLiga int
 	)
 AS
 BEGIN
-if(not exists(select * from TipoSanciones where nombre=@nombre ))
-	begin
+
 	INSERT INTO TipoSanciones(nombre,descripcion,tiempo,valor,estado,idLiga)
 		VALUES (@nombre,@descripcion,@tiempo,@valor,@estado,@idLiga);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Equipos
 SET ANSI_NULLS ON
@@ -158,7 +137,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarEquipos
+CREATE PROCEDURE spInsertarEquipos(
 	@nombre VARCHAR (20),
 	@logo varbinary,
 	@correoE varchar(320),
@@ -167,25 +146,15 @@ CREATE PROCEDURE spInsertarEquipos
 	@fechaFundacion date,
 	@descripcion varchar (200),
 	@numIdentificacion varchar(12),
-	@idCampeonato int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idCampeonato int
 	)
 AS
 BEGIN
-if(not exists(select * from Equipos where numIdentificacion=@numIdentificacion ))
-	begin
 	INSERT INTO Equipos(nombre,logo,correoE, lugar, capitan, fechaFundacion, descripcion,numIdentificacion)
 		VALUES (@nombre,@logo,@correoE, @lugar, @capitan, @fechaFundacion, @descripcion,@numIdentificacion);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 --procedimiento para insertar datos en tabla Jugadores
 SET ANSI_NULLS ON
@@ -193,7 +162,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarJugadores
+CREATE PROCEDURE spInsertarJugadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar (20),
 	@apellidoM varchar (20),
@@ -202,25 +171,16 @@ CREATE PROCEDURE spInsertarJugadores
 	@fechaNacimiento date,
 	@edad int, 
 	@cedula varchar (10),
-	@idEquipo int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idEquipo int
 	)
 AS
 BEGIN
-if(not exists(select * from Jugadores where cedula=@cedula ))
-	begin
+
 	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
 		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
+		
 END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
-END
+
 
 
 --procedimiento para insertar datos en tabla Sanciones
@@ -228,18 +188,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE spInsertarSanciones
+CREATE PROCEDURE spInsertarSanciones(
 	@activa binary,
 	@idJugador int,
 	@idEquipo int,
 	@idCampeonato int,
-	@idTipoS,
+	@idTipoS int
 	)
 AS
 BEGIN
 
-	INSERT INTO Sanciones(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
-		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
+	INSERT INTO Sanciones(activa,idJugador,idEquipo,idCampeonato,idTipoS)
+		VALUES (@activa,@idJugador,@idEquipo,@idCampeonato,@idTipoS);
 		
 END
 
@@ -249,30 +209,20 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarEventos
+CREATE PROCEDURE spInsertarEventos(
 	@nombre VARCHAR (20),
 	@fecha date,
 	@hora time,
 	@equipoVisitante int,
 	@equipoResidente int,
-	@idCampeonato int, 
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idCampeonato int
 	)
 AS
 BEGIN
-if(not exists(select * from Eventos where nombre=@nombre ))
-	begin
+
 	INSERT INTO Eventos(nombre,fecha, hora, equipoVisitante,equipoResidente,idCampeonato)
 		VALUES (@nombre,@fecha, @hora, @equipoVisitante,@equipoResidente,@idCampeonato);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
-END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
+		
 END
 
 --procedimiento para insertar datos en tabla Entrenadores
@@ -281,7 +231,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarEntrenadores
+CREATE PROCEDURE spInsertarEntrenadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar(20),
 	@apellidoM varchar(20),
@@ -289,24 +239,15 @@ CREATE PROCEDURE spInsertarEntrenadores
 	@fechaNacimiento date, 
 	@correoE varchar(320),
 	@cedula varchar(10),
-	@idEquipo int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@idEquipo int
+	
 	)
 AS
 BEGIN
-if(not exists(select * from Entrenadores where cedula=@cedula ))
-	begin
+
 	INSERT INTO Entrenadores(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
 		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Sancion Ingresada con Exito'
-END
-ELSE
-BEGIN 
-		set @Registrado=0
-		set @mensaje='Ya existe tipo de sancion con este nombre'
-END
+		
 END
 
 --procedimiento para insertar datos en tabla Resultados
@@ -315,33 +256,31 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spInsertarResultados
+CREATE PROCEDURE spInsertarResultados(
 	@idEquipo int,
 	@idEvento int,
-	@ triunfos int,
+	@triunfos int,
 	@empates int,
 	@derrotas int,
 	@juegos int,
 	@golesFavor int,
 	@golesContra int,
-	@diferenciaGoles int,
-	@registrado bit output,
-	@mensaje varchar(80) output
+	@diferenciaGoles int
 	)
 AS
 BEGIN
-	INSERT INTO Resultados(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
-		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
+	INSERT INTO Resultados(idEquipo,idEvento,triufos,empates,derrotas,juegos,golesFavor,golesContra,diferenciaGoles)
+		VALUES (@idEquipo,@idEvento,@triunfos,@empates,@derrotas,@juegos,@golesFavor,@golesContra,@diferenciaGoles);
 		
 END
-END
+
 
 
 ---PROCEDIMIENTOS ALMACENADOS PARA ACTUALIZAR TABLAS
 
 ---Procedimiento para actualizar la tabla Usuarios
 
-CREATE PROCEDURE spActualizarUsuario
+CREATE PROCEDURE spActualizarUsuario(
 	@id int,
 	@nombre VARCHAR (20),
 	@apellidoP VARCHAR (20),
@@ -349,6 +288,7 @@ CREATE PROCEDURE spActualizarUsuario
 	@correoE VARCHAR (320),
 	@contrasena VARCHAR (100),
 	@idTipoUsuario int
+)
 AS
 --- ===========================================
 -- Author: Geisel Venegas
@@ -361,16 +301,40 @@ BEGIN
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	correoE=@correoE,
-	contraseña=@contraseña
+	contrasena=@contrasena
 	WHERE id=@id;
 END
 
+--- Procedimiento para actualizar la tabla ResultadosIndividuales
+CREATE PROCEDURE spActualizarResultadosIndividuales(
+	@fecha date,
+	@idJugador int,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+)
+AS
+--- ===========================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Modifica los datos de un usuario
+-- ============================================
+BEGIN
+
+	UPDATE ResultadosIndividuales SET fecha=@fecha,
+	idJugador=@idJugador,
+	cantidadGoles=@cantidadGoles,
+	asistencias=@asistencias,
+	tRojas=@tRojas
+	WHERE id=@id;
+END
 ---Procedimiento para actualizar la tabla TipoUsuarios
 
-CREATE PROCEDURE spActualizarTipoUsuarios
+CREATE PROCEDURE spActualizarTipoUsuarios(
 	@id int,
-	@nombre VARCHAR (20),
-	
+	@nombre VARCHAR (20)
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -386,7 +350,7 @@ END
 
 ---Procedimiento para actualizar la tabla Entrenadores
 
-CREATE PROCEDURE spActualizarEntrenadores
+CREATE PROCEDURE spActualizarEntrenadores(
 	@id int,
 	@nombre VARCHAR (20),
 	@apellidoP varchar(20),
@@ -396,7 +360,7 @@ CREATE PROCEDURE spActualizarEntrenadores
 	@correoE varchar(320),
 	@cedula varchar(10),
 	@idEquipo int
-	
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -405,11 +369,11 @@ AS
 -- ====================================================
 BEGIN
 
-	UPDATE TipoUsuarios SET nombre=nombre
+	UPDATE Entrenadores SET nombre=nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	foto=@foto,
-	fehaNacimiento=@fechaNacimiento, 
+	fechaNacimiento=@fechaNacimiento, 
 	correoE=@correoE,
 	cedula=@cedula,
 	idEquipo=@idEquipo
@@ -419,7 +383,7 @@ END
 
 ---Procedimiento para actualizar la tabla Equipos
 
-CREATE PROCEDURE spActualizarEquipos
+CREATE PROCEDURE spActualizarEquipos(
 	@id int,
 	@nombre VARCHAR (20),
 	@logo varbinary,
@@ -430,7 +394,7 @@ CREATE PROCEDURE spActualizarEquipos
 	@descripcion varchar (200),
 	@numIdentificacion varchar(12),
 	@idCampeonato int
-	
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -439,33 +403,33 @@ AS
 -- ====================================================
 BEGIN
 
-	UPDATE Equipos SET nombre=nombre
+	UPDATE Equipos SET nombre=nombre,
 	logo=@logo, 
 	correoE=@correoE,
 	lugar=@lugar,
 	capitan=@capitan,
-	fehaFundacion=@fechaFundacion,
+	fechaFundacion=@fechaFundacion,
 	descripcion=@descripcion,
 	numIdentificacion=@numIdentificacion,
-	idCampeonato=@ideCampeonato
+	idCampeonato=@idCampeonato
 	
 	WHERE id=@id;
 END
 
 ---Procedimiento para actualizar la tabla Resultados
 
-CREATE PROCEDURE spActualizarResultados
+CREATE PROCEDURE spActualizarResultados(
 	@id int,
 	@idEquipo int,
 	@idEvento int,
-	@ triunfos int,
+	@triunfos int,
 	@empates int,
 	@derrotas int,
 	@juegos int,
 	@golesFavor int,
 	@golesContra int,
 	@diferenciaGoles int
-	
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -489,14 +453,14 @@ END
 
 ---Procedimiento para actualizar la tabla Sanciones
 
-CREATE PROCEDURE spActualizarSanciones
+CREATE PROCEDURE spActualizarSanciones(
 	@id int,
 	@activa binary,
 	@idJugador int,
 	@idEquipo int,
 	@idCampeonato int,
-	@idTipoS
-	
+	@idTipoS int
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -516,7 +480,7 @@ END
 
 ---Procedimiento para actualizar la tabla Eventos
 
-CREATE PROCEDURE spActualizarEventos
+CREATE PROCEDURE spActualizarEventos(
 	@id int,
 	@nombre VARCHAR (20),
 	@fecha date,
@@ -524,7 +488,7 @@ CREATE PROCEDURE spActualizarEventos
 	@equipoVisitante int,
 	@equipoResidente int,
 	@idCampeonato int
-	
+)
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -545,7 +509,7 @@ END
 
 ---Procedimiento para actualizar la tabla Jugadores
 
-CREATE PROCEDURE spActualizarJugadores
+CREATE PROCEDURE spActualizarJugadores(
 	@id int,
 	@nombre VARCHAR (20),
 	@apellidoP varchar (20),
@@ -556,7 +520,7 @@ CREATE PROCEDURE spActualizarJugadores
 	@edad int, 
 	@cedula varchar (10),
 	@idEquipo int
-	
+)	
 AS
 --- ===================================================
 -- Author: Geisel Venegas
@@ -566,7 +530,6 @@ AS
 BEGIN
 
 	UPDATE Jugadores SET nombre=@nombre,
-	nombre=@nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	foto=@foto,
@@ -581,7 +544,7 @@ END
 
 ---Procedimiento para actualizar la tabla TipoSanciones
 
-CREATE PROCEDURE spActualizarTipoSanciones
+CREATE PROCEDURE spActualizarTipoSanciones(
 	@id int,
 	@nombre VARCHAR (25),
 	@descripcion VARCHAR(100),
@@ -589,7 +552,7 @@ CREATE PROCEDURE spActualizarTipoSanciones
 	@valor int,
 	@estado binary,
 	@idLiga int
-	
+)	
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -610,13 +573,13 @@ END
 
 ---Procedimiento para actualizar la tabla Ligas
 
-CREATE PROCEDURE spActualizarLigas
+CREATE PROCEDURE spActualizarLigas(
 	@id int,
 	@nombre VARCHAR (20),
 	@descripcion VARCHAR (200),
 	@correoE VARCHAR (320),
 	@telefono VARCHAR (10)
-	
+)	
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -635,15 +598,15 @@ END
 
 ---Procedimiento para actualizar la tabla Campeonatos
 
-CREATE PROCEDURE spActualizarCampeonatos
+CREATE PROCEDURE spActualizarCampeonatos(
 	@id int,
 	@nombre VARCHAR (20),
 	@fechaInicio date,
 	@fechaCierre date,
 	@numeroEquiposP int, 
 	@activo binary,
-	idLiga int
-	
+	@idLiga int
+)	
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -665,9 +628,9 @@ END
 
 ---PROCEDIMIENTOS ALMACENADOS PARA ELIMINAR REGISTROS DE LAS TABLAS
 --Procedimiento para Eliminar Usuario
-CREATE PROCEDURE spEliminarUsuarios
-	@id
-
+CREATE PROCEDURE spEliminarUsuarios(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -679,10 +642,25 @@ BEGIN
 	DELETE Usuarios WHERE id=@id;
 END
 
---Procedimiento para Eliminar TipoUsuarios
-CREATE PROCEDURE spEliminarUsuarios
-	@id
+--Procedimiento para Eliminar ResultadosIndividuales
+CREATE PROCEDURE spEliminarResultadosIndividuales(
+	@id int
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla usarios
+-- ========================================================
+BEGIN
 
+	DELETE ResultadosIndividuales WHERE id=@id;
+END
+
+--Procedimiento para Eliminar TipoUsuarios
+CREATE PROCEDURE spEliminartTipoUsuarios(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -695,9 +673,10 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Entrenadores
-CREATE PROCEDURE spEliminarEntrenadores
-	@id
-
+CREATE PROCEDURE spEliminarEntrenadores(
+	@id int
+)
+	
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -710,9 +689,10 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Equipos
-CREATE PROCEDURE spEliminarUsuarios
-	@id
-
+CREATE PROCEDURE spEliminarEquipos(
+	@id int
+)
+	
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -725,9 +705,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Resultados
-CREATE PROCEDURE spEliminarResultados
-	@id
-
+CREATE PROCEDURE spEliminarResultados(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -740,9 +720,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Eventos
-CREATE PROCEDURE spEliminarEventos
-	@id
-
+CREATE PROCEDURE spEliminarEventos(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -755,9 +735,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Sanciones
-CREATE PROCEDURE spEliminarSanciones
-	@id
-
+CREATE PROCEDURE spEliminarSanciones(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -770,9 +750,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar TipoSanciones
-CREATE PROCEDURE spEliminarSanciones
-	@id
-
+CREATE PROCEDURE spEliminarTipoSanciones(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -785,9 +765,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Jugadores
-CREATE PROCEDURE spEliminarJugadores
-	@id
-
+CREATE PROCEDURE spEliminarJugadores(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -800,8 +780,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Ligas
-CREATE PROCEDURE spEliminarLigas
-
+CREATE PROCEDURE spEliminarLigas(
+	@id int
+)
 AS
 --- =======================================================
 -- Author: Geisel Venegas
@@ -814,7 +795,9 @@ BEGIN
 END
 
 --Procedimiento para Eliminar Campeonatos
-CREATE PROCEDURE spEliminarCampeonatos
+CREATE PROCEDURE spEliminarCampeonatos(
+	@id int
+)
 
 AS
 --- =======================================================
@@ -847,6 +830,23 @@ BEGIN
 	SELECT * FROM Usuarios
 END
 
+---Procedimiento almacenado para la seleccion de datos de la tabla usuarios segun id
+CREATE PROCEDURE spGetUsuario
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Usuarios where id=@id
+END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios 
 CREATE PROCEDURE spGetTipoUsuarios
@@ -866,6 +866,23 @@ BEGIN
 	SELECT * FROM TipoUsuarios
 END
 
+---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios segun id
+CREATE PROCEDURE spGetTipoUsuario
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM TipoUsuarios where id=@id
+END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla Entrenadores
 CREATE PROCEDURE spGetEntrenadores
@@ -1032,3 +1049,24 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM Campeonatos
 END
+
+
+
+--Procedimiento para Validar Usuarios
+CREATE PROCEDURE spValidarUsuarios(
+	@correoE VARCHAR (320),
+	@contrasena VARCHAR (100)
+	
+	)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	if(exists(select * from Usuarios where correoE=@correoE and contrasena=@contrasena))
+	select id from Usuarios where correoE=@correoE and contrasena=@contrasena
+	else 
+	select '0'
+	end
