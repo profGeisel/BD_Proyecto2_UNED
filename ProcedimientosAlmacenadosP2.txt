@@ -13,9 +13,30 @@ BEGIN
 
 	INSERT INTO TipoUsuarios(nombre)
 		VALUES (@nombre);
-		SET @registrado=1
-		SET @mensaje= 'Tipo de Usuario Ingresado con Exito'
+		
 
+END
+
+--procedimiento para insertar datos en tabla tipo Usuarios
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spInsertarResultadosIndividuales(
+	@fecha date,
+	@idJugador int,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+		)
+AS
+BEGIN
+
+	INSERT INTO ResultadosIndividuales(fecha idJugador, cantidadGoles, asistencias,tRojas, tAmarillas)
+		VALUES (@fecha, @idJugador, @cantidadGoles, @asistencias,@tRojas, @tAmarillas);
+		
 END
 
 
@@ -284,6 +305,30 @@ BEGIN
 	WHERE id=@id;
 END
 
+--- Procedimiento para actualizar la tabla ResultadosIndividuales
+CREATE PROCEDURE spActualizarResultadosIndividuales(
+	@fecha date,
+	@idJugador int,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+)
+AS
+--- ===========================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Modifica los datos de un usuario
+-- ============================================
+BEGIN
+
+	UPDATE ResultadosIndividuales SET fecha=@fecha,
+	idJugador=@idJugador,
+	cantidadGoles=@cantidadGoles,
+	asistencias=@asistencias,
+	tRojas=@tRojas
+	WHERE id=@id;
+END
 ---Procedimiento para actualizar la tabla TipoUsuarios
 
 CREATE PROCEDURE spActualizarTipoUsuarios(
@@ -595,6 +640,21 @@ AS
 BEGIN
 
 	DELETE Usuarios WHERE id=@id;
+END
+
+--Procedimiento para Eliminar ResultadosIndividuales
+CREATE PROCEDURE spEliminarResultadosIndividuales(
+	@id int
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite eliminar un registro de la tabla usarios
+-- ========================================================
+BEGIN
+
+	DELETE ResultadosIndividuales WHERE id=@id;
 END
 
 --Procedimiento para Eliminar TipoUsuarios
