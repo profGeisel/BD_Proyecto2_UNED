@@ -34,7 +34,7 @@ CREATE PROCEDURE spInsertarResultadosIndividuales(
 AS
 BEGIN
 
-	INSERT INTO ResultadosIndividuales(fecha idJugador, cantidadGoles, asistencias,tarjetasRojas, tarjetasAmarillas)
+	INSERT INTO ResultadosIndividuales(fecha,idJugador, cantidadGoles, asistencias,tarjetasRojas, tarjetasAmarillas)
 		VALUES (@fecha, @idJugador, @cantidadGoles, @asistencias,@tRojas, @tAmarillas);
 		
 END
@@ -199,7 +199,7 @@ AS
 BEGIN
 
 	INSERT INTO Sanciones(esActiva,idJugador,idEquipo,idCampeonato,idTipoS)
-		VALUES (@activa,@idJugador,@idEquipo,@idCampeonato,@idTipoS);
+		VALUES (@esActiva,@idJugador,@idEquipo,@idCampeonato,@idTipoS);
 		
 END
 
@@ -831,7 +831,9 @@ BEGIN
 END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla usuarios segun id
-CREATE PROCEDURE spGetUsuario
+CREATE PROCEDURE spGetUsuario(
+	@id int
+)
 
 AS
 --- =======================================================
@@ -867,7 +869,9 @@ BEGIN
 END
 
 ---Procedimiento almacenado para la seleccion de datos de la tabla TipoUsuarios segun id
-CREATE PROCEDURE spGetTipoUsuario
+CREATE PROCEDURE spGetTipoUsuario(
+	@id int
+)
 
 AS
 --- =======================================================
