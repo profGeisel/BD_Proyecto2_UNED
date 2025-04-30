@@ -2,6 +2,7 @@ Create Database BDLigasFutbol
 
 use BDLigasFutbol;
 
+
 create table TipoUsuarios (id int primary key IDENTITY(1,1),
 nombre varchar(25) not null);
 
@@ -12,6 +13,7 @@ constraint fk_UsuTip foreign key(idTipoUsuario) references TipoUsuarios(id));
 
 create table Ligas (id int primary key IDENTITY(1,1), nombre varchar(20) not null, 
 descripcion varchar(200) not null, correoE varchar(320) not null, telefono varchar(10) not null);
+
 
 
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
@@ -34,6 +36,7 @@ constraint fk_EquCam foreign key(idCampeonato) references Campeonatos(id));
 create table Jugadores (id int primary key IDENTITY(1,1), 
 nombre varchar(20) not null, apellidoP varchar(20) , apellidoM varchar(20) , 
 foto varbinary , numeroCamisa int not null, A_Nacimiento int not null, 
+
 edad int not null, cedula varchar(10) not null, idEquipo int not null,
 constraint fk_JugEqu foreign key(idEquipo) references Equipos(id));
 
@@ -69,6 +72,4 @@ create table ResultadosIndividuales (id int primary key IDENTITY (1,1),
 fecha date not null , idJugador int not null, cantidadGoles int not null, 
 asistencias int , tarjetasRojas int , tarjetasAmarillas int, 
 constraint fk_ResJug foreign key(idJugador) references Jugadores(id);
-
-
 
