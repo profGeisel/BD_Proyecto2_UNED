@@ -96,7 +96,7 @@ CREATE PROCEDURE spInsertarCampeonatos(
 	@fechaInicio date,
 	@fechaCierre date,
 	@numeroEquiposP int, 
-	@activo binary,
+	@activo varchar(2),
 	@idLiga int
 	)
 AS
@@ -119,7 +119,7 @@ CREATE PROCEDURE spInsertarTipoSanciones(
 	@descripcion VARCHAR(100),
 	@tiempo int,
 	@valor int,
-	@estado binary,
+	@estado varchar(20),
 	@idLiga int
 	)
 AS
@@ -189,7 +189,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE spInsertarSanciones(
-	@activa binary,
+	@esActiva varchar(2),
 	@idJugador int,
 	@idEquipo int,
 	@idCampeonato int,
@@ -198,7 +198,7 @@ CREATE PROCEDURE spInsertarSanciones(
 AS
 BEGIN
 
-	INSERT INTO Sanciones(activa,idJugador,idEquipo,idCampeonato,idTipoS)
+	INSERT INTO Sanciones(esActiva,idJugador,idEquipo,idCampeonato,idTipoS)
 		VALUES (@activa,@idJugador,@idEquipo,@idCampeonato,@idTipoS);
 		
 END
@@ -455,7 +455,7 @@ END
 
 CREATE PROCEDURE spActualizarSanciones(
 	@id int,
-	@activa binary,
+	@esActiva varchar(2),
 	@idJugador int,
 	@idEquipo int,
 	@idCampeonato int,
@@ -469,7 +469,7 @@ AS
 -- ====================================================
 BEGIN
 
-	UPDATE Sanciones SET activa=@activa,
+	UPDATE Sanciones SET esActiva=@esActiva,
 	idJugador=@idJugador,
 	idEquipo=@idEquipo,
 	idCampeonato=@idCampeonato,
@@ -550,7 +550,7 @@ CREATE PROCEDURE spActualizarTipoSanciones(
 	@descripcion VARCHAR(100),
 	@tiempo int,
 	@valor int,
-	@estado binary,
+	@estado varchar(20),
 	@idLiga int
 )	
 AS
@@ -604,7 +604,7 @@ CREATE PROCEDURE spActualizarCampeonatos(
 	@fechaInicio date,
 	@fechaCierre date,
 	@numeroEquiposP int, 
-	@activo binary,
+	@activo varchar(2),
 	@idLiga int
 )	
 AS

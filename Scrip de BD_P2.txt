@@ -16,13 +16,13 @@ descripcion varchar(200) not null, correoE varchar(320) not null, telefono varch
 
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
 fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
-activo binary not null, idLiga int not null, 
+activo varchar(2) not null, idLiga int not null, 
 constraint fk_CamLig foreign key(idLiga) references Ligas(id));
 
 
 create table TipoSanciones (id int primary key IDENTITY (1,1), 
 nombre varchar(25) not null unique, descripcion varchar(100) not null, 
-tiempo int not null, valor int not null, estado binary not null,
+tiempo int not null, valor int not null, estado varchar(20) not null,
 idLiga int not null,constraint fk_TipLig foreign key(idLiga) references Ligas(id));
 
 create table Equipos (id int primary key IDENTITY(1,1), 
@@ -38,7 +38,7 @@ edad int not null, cedula varchar(10) not null, idEquipo int not null,
 constraint fk_JugEqu foreign key(idEquipo) references Equipos(id));
 
 create table Sanciones (id int primary key identity (1,1), 
-activa BOOLEAN not null, idJugador int , idEquipo int ,
+esActiva varchar(2) not null, idJugador int , idEquipo int ,
 idCampeonato int not null, idTipoS int not null,
 constraint fk_SanJug foreign key(idJugador) references Jugadores(id),
 constraint fk_SanEqu foreign key(idEquipo) references Equipos(id),
