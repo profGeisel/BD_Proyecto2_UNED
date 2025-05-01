@@ -1224,3 +1224,52 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM Equipos where id=@id
 END
+
+--- Procedimiento almacenado para la seleccion de datos de la tabla Resultados Individuales
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Equipos
+CREATE PROCEDURE [dbo].[spGetResultadosIndividuales]
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM ResultadosIndividuales
+END
+
+--- Procedimiento almacenado para la
+--- seleccion de datos de la tabla Resultados Individuales segun id
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Equipos
+CREATE PROCEDURE [dbo].[spGetResultadoIndividual]
+(@id int
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM ResultadosIndividuales where id=@id
+END
+
