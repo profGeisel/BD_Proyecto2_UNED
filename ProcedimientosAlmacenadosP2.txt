@@ -343,7 +343,7 @@ AS
 -- ====================================================
 BEGIN
 
-	UPDATE TipoUsuarios SET nombre=nombre
+	UPDATE TipoUsuarios SET nombre=@nombre
 	
 	WHERE id=@id;
 END
@@ -658,7 +658,7 @@ BEGIN
 END
 
 --Procedimiento para Eliminar TipoUsuarios
-CREATE PROCEDURE spEliminartTipoUsuarios(
+CREATE PROCEDURE spEliminarTipoUsuarios(
 	@id int
 )
 AS
@@ -1073,3 +1073,29 @@ BEGIN
 	select id from Usuarios where correoE=@correoE and contrasena=@contrasena
 	
 	end
+
+---Procedimiento Seleccion de Sanciones segun id
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Sanciones segun id
+
+create PROCEDURE [dbo].[spGetSancion](
+	@id int
+)
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Sanciones where id=@id
+END
