@@ -27,7 +27,7 @@ idLiga int not null,constraint fk_TipLig foreign key(idLiga) references Ligas(id
 
 create table Equipos (id int primary key IDENTITY(1,1), 
 nombre varchar(20) not null, logo varbinary , correoE varchar(320) not null, lugar varchar (20) not null, 
-capitan varchar(25) not null, fechaFundacion date, descripcion varchar(200), 
+fechaFundacion date, descripcion varchar(200), 
 numIdentificacion varchar(12) not null unique, idCampeonato int not null,
 constraint fk_EquCam foreign key(idCampeonato) references Campeonatos(id));
 
@@ -68,7 +68,7 @@ constraint fk_ResEve foreign key(idEvento) references Eventos(id));
 create table ResultadosIndividuales (id int primary key IDENTITY (1,1), 
 fecha date not null , idJugador int not null, cantidadGoles int not null, 
 asistencias int , tarjetasRojas int , tarjetasAmarillas int, 
-constraint fk_ResJug foreign key(idJugador) references Jugadores(id);
+constraint fk_ResJug foreign key(idJugador) references Jugadores(id));
 
 
 

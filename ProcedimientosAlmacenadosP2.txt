@@ -1200,3 +1200,27 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM Eventos where id=@id
 END
+
+--- Procedimiento para seleccionar equipo segun id
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Equipos
+CREATE PROCEDURE [dbo].[spGetEquipo]
+(@id int
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Equipos where id=@id
+END
