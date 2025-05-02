@@ -139,10 +139,8 @@ GO
 
 CREATE PROCEDURE spInsertarEquipos(
 	@nombre VARCHAR (20),
-	@logo varbinary,
 	@correoE varchar(320),
 	@lugar varchar(20),
-	@capitan varchar(100),
 	@fechaFundacion date,
 	@descripcion varchar (200),
 	@numIdentificacion varchar(12),
@@ -150,8 +148,8 @@ CREATE PROCEDURE spInsertarEquipos(
 	)
 AS
 BEGIN
-	INSERT INTO Equipos(nombre,logo,correoE, lugar, capitan, fechaFundacion, descripcion,numIdentificacion)
-		VALUES (@nombre,@logo,@correoE, @lugar, @capitan, @fechaFundacion, @descripcion,@numIdentificacion);
+	INSERT INTO Equipos(nombre,correoE, lugar,  fechaFundacion, descripcion,numIdentificacion)
+		VALUES (@nombre,@correoE, @lugar, @fechaFundacion, @descripcion,@numIdentificacion);
 		
 END
 
@@ -166,7 +164,6 @@ CREATE PROCEDURE spInsertarJugadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar (20),
 	@apellidoM varchar (20),
-	@foto varbinary,
 	@numeroCamisa int, 
 	@fechaNacimiento date,
 	@edad int, 
@@ -176,8 +173,8 @@ CREATE PROCEDURE spInsertarJugadores(
 AS
 BEGIN
 
-	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,foto,numeroCamisa,fechaNacimiento,edad, cedula)
-		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
+	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,numeroCamisa,fechaNacimiento,edad, cedula)
+		VALUES (@nombre,@apellidoP,@apellidoM,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
 		
 END
 
@@ -235,7 +232,6 @@ CREATE PROCEDURE spInsertarEntrenadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar(20),
 	@apellidoM varchar(20),
-	@foto varbinary,
 	@fechaNacimiento date, 
 	@correoE varchar(320),
 	@cedula varchar(10),
@@ -245,8 +241,8 @@ CREATE PROCEDURE spInsertarEntrenadores(
 AS
 BEGIN
 
-	INSERT INTO Entrenadores(nombre,apellidoP,apellidoM,foto,fechaNacimiento,correoE,cedula,idEquipo)
-		VALUES (@nombre,@apellidoP,@apellidoM,@foto,@fechaNacimiento,@correoE,@cedula,@idEquipo);
+	INSERT INTO Entrenadores(nombre,apellidoP,apellidoM,fechaNacimiento,correoE,cedula,idEquipo)
+		VALUES (@nombre,@apellidoP,@apellidoM,@fechaNacimiento,@correoE,@cedula,@idEquipo);
 		
 END
 
@@ -386,10 +382,8 @@ END
 CREATE PROCEDURE spActualizarEquipos(
 	@id int,
 	@nombre VARCHAR (20),
-	@logo varbinary,
 	@correoE varchar(320),
 	@lugar varchar(20),
-	@capitan varchar(100),
 	@fechaFundacion date,
 	@descripcion varchar (200),
 	@numIdentificacion varchar(12),
@@ -404,10 +398,8 @@ AS
 BEGIN
 
 	UPDATE Equipos SET nombre=nombre,
-	logo=@logo, 
 	correoE=@correoE,
 	lugar=@lugar,
-	capitan=@capitan,
 	fechaFundacion=@fechaFundacion,
 	descripcion=@descripcion,
 	numIdentificacion=@numIdentificacion,
@@ -514,7 +506,6 @@ CREATE PROCEDURE spActualizarJugadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar (20),
 	@apellidoM varchar (20),
-	@foto varbinary,
 	@numeroCamisa int, 
 	@fechaNacimiento date,
 	@edad int, 
@@ -532,7 +523,6 @@ BEGIN
 	UPDATE Jugadores SET nombre=@nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
-	foto=@foto,
 	numeroCamisa=@numeroCamisa, 
 	fechaNacimiento=@fechaNacimiento,
 	edad=@edad, 
@@ -1273,3 +1263,26 @@ BEGIN
 	SELECT * FROM ResultadosIndividuales where id=@id
 END
 
+--- Procedimiento almacenado para seleccion de datos de tabla Campeonatos segun idSET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Campeonatos
+CREATE PROCEDURE [dbo].[spGetCampeonato](
+@id int
+)
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Campeonatos WHERE id=@id
+END
