@@ -2,7 +2,6 @@ Create Database BDLigasFutbol
 
 use BDLigasFutbol;
 
-
 create table TipoUsuarios (id int primary key IDENTITY(1,1),
 nombre varchar(25) not null);
 
@@ -15,33 +14,31 @@ create table Ligas (id int primary key IDENTITY(1,1), nombre varchar(20) not nul
 descripcion varchar(200) not null, correoE varchar(320) not null, telefono varchar(10) not null);
 
 
-
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
 fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
-activo binary not null, idLiga int not null, 
+activo int not null, idLiga int not null, 
 constraint fk_CamLig foreign key(idLiga) references Ligas(id));
 
 
 create table TipoSanciones (id int primary key IDENTITY (1,1), 
 nombre varchar(25) not null unique, descripcion varchar(100) not null, 
-tiempo int not null, valor int not null, estado binary not null,
+tiempo int not null, valor int not null, estado varchar(20) not null,
 idLiga int not null,constraint fk_TipLig foreign key(idLiga) references Ligas(id));
 
 create table Equipos (id int primary key IDENTITY(1,1), 
-nombre varchar(20) not null, logo varbinary , correoE varchar(320) not null, lugar varchar (20) not null, 
-capitan varchar(25) not null, fechaFundacion date, descripcion varchar(200), 
+nombre varchar(20) not null,  correoE varchar(320) not null, lugar varchar (20) not null, 
+fechaFundacion date, descripcion varchar(200), 
 numIdentificacion varchar(12) not null unique, idCampeonato int not null,
 constraint fk_EquCam foreign key(idCampeonato) references Campeonatos(id));
 
 create table Jugadores (id int primary key IDENTITY(1,1), 
 nombre varchar(20) not null, apellidoP varchar(20) , apellidoM varchar(20) , 
-foto varbinary , numeroCamisa int not null, A_Nacimiento int not null, 
-
+numeroCamisa int not null, fechaNacimiento date not null, 
 edad int not null, cedula varchar(10) not null, idEquipo int not null,
 constraint fk_JugEqu foreign key(idEquipo) references Equipos(id));
 
 create table Sanciones (id int primary key identity (1,1), 
-activa BOOLEAN not null, idJugador int , idEquipo int ,
+esActiva varchar(2) not null, idJugador int , idEquipo int ,
 idCampeonato int not null, idTipoS int not null,
 constraint fk_SanJug foreign key(idJugador) references Jugadores(id),
 constraint fk_SanEqu foreign key(idEquipo) references Equipos(id),
@@ -56,8 +53,7 @@ constraint fk_EveEqu1 foreign key(equipoResidente) references Equipos(id),
 constraint fk_EveCam foreign key(idCampeonato) references Campeonatos(id));
 
 create table Entrenadores (id int primary key IDENTITY(1,1), 
-nombre varchar(20) not null, apellidoP varchar(20), apellidoM varchar(20),
-foto varbinary , fechaNacimiento date not null, correoE varchar(320), 
+nombre varchar(20) not null, apellidoP varchar(20), apellidoM varchar(20), fechaNacimiento date not null, correoE varchar(320), 
 cedula varchar(10) not null,idEquipo int not null,
 constraint fk_EntEqu foreign key(idEquipo) references Equipos(id));
 
@@ -71,5 +67,7 @@ constraint fk_ResEve foreign key(idEvento) references Eventos(id));
 create table ResultadosIndividuales (id int primary key IDENTITY (1,1), 
 fecha date not null , idJugador int not null, cantidadGoles int not null, 
 asistencias int , tarjetasRojas int , tarjetasAmarillas int, 
-constraint fk_ResJug foreign key(idJugador) references Jugadores(id);
+constraint fk_ResJug foreign key(idJugador) references Jugadores(id));
+
+
 
