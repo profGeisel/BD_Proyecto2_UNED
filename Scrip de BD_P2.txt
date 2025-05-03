@@ -16,7 +16,7 @@ descripcion varchar(200) not null, correoE varchar(320) not null, telefono varch
 
 create table Campeonatos(id int primary key IDENTITY, nombre varchar(20) not null unique, 
 fechainicio date not null, fechaCierre date not null, numeroEquiposP int not null,
-activo varchar(2) not null, idLiga int not null, 
+activo int not null, idLiga int not null, 
 constraint fk_CamLig foreign key(idLiga) references Ligas(id));
 
 

@@ -161,7 +161,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE spInsertarJugadores(
-	@nombre VARCHAR (20),
+	@nombre varchar (20),
 	@apellidoP varchar (20),
 	@apellidoM varchar (20),
 	@numeroCamisa int, 
@@ -173,8 +173,8 @@ CREATE PROCEDURE spInsertarJugadores(
 AS
 BEGIN
 
-	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,numeroCamisa,fechaNacimiento,edad, cedula)
-		VALUES (@nombre,@apellidoP,@apellidoM,@numeroCamisa,@fechaNacimiento,@edad, @cedula);
+	INSERT INTO Jugadores(nombre,apellidoP,apellidoM,numeroCamisa,fechaNacimiento,edad, cedula, idEquipo)
+		VALUES (@nombre,@apellidoP,@apellidoM,@numeroCamisa,@fechaNacimiento,@edad, @cedula, @idEquipo);
 		
 END
 
@@ -297,7 +297,8 @@ BEGIN
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
 	correoE=@correoE,
-	contrasena=@contrasena
+	contrasena=@contrasena,
+	idTipoUsuario=@idTipoUsuario
 	WHERE id=@id;
 END
 
@@ -351,7 +352,6 @@ CREATE PROCEDURE spActualizarEntrenadores(
 	@nombre VARCHAR (20),
 	@apellidoP varchar(20),
 	@apellidoM varchar(20),
-	@foto varbinary,
 	@fechaNacimiento date, 
 	@correoE varchar(320),
 	@cedula varchar(10),
@@ -368,7 +368,6 @@ BEGIN
 	UPDATE Entrenadores SET nombre=nombre,
 	apellidoP=@apellidoP,
 	apellidoM=@apellidoM,
-	foto=@foto,
 	fechaNacimiento=@fechaNacimiento, 
 	correoE=@correoE,
 	cedula=@cedula,
@@ -1285,4 +1284,168 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT * FROM Campeonatos WHERE id=@id
+END
+
+--- Procedimiento de consulta Ligas por id
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Ligas
+CREATE PROCEDURE [dbo].[spGetLiga](
+@id INT
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Ligas where id=@id
+END
+
+--- sp para seleccion de jugadores por id
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Jugadores
+CREATE PROCEDURE [dbo].[spGetJugador](
+@id int
+)
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 30-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Jugadores where id=@id
+END
+
+--- Sp para seleccion de Entrenadores por id
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Procedimiento almacenado para la seleccion de datos de la tabla Entrenadores
+CREATE PROCEDURE [dbo].[spGetEntrenador](
+@id int
+)
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Entrenadores where id=@id
+END
+
+--- GET RESULTADO POR id
+CREATE PROCEDURE [dbo].[spGetResultado](
+@id int
+)
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM Resultados where id=@id
+END
+
+---GET RESULTADO INDIVIDUAL POR id
+CREATE PROCEDURE [dbo].[spGetResultadoIndividual](
+@id int
+)
+
+AS
+--- =======================================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Permite la seleccion de registros
+-- ========================================================
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM ResultadosIndividuales where id=@id
+END
+
+--- Modificacion procedimiento insert Resultados Individuales
+ALTER PROCEDURE [dbo].[spInsertarResultadosIndividuales](
+	@idJugador int,
+	@fecha date,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+		)
+AS
+BEGIN
+
+	INSERT INTO ResultadosIndividuales(idJugador,fecha, cantidadGoles, asistencias,tarjetasRojas, tarjetasAmarillas)
+		VALUES (@idJugador, @fecha, @cantidadGoles, @asistencias,@tRojas, @tAmarillas);
+		
+END
+
+--- modificacion actualizar ResultadosIndividuales
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--- Procedimiento para actualizar la tabla ResultadosIndividuales
+ALTER PROCEDURE [dbo].[spActualizarResultadosIndividuales](
+	@id int,
+	@idJugador int,
+	@fecha date,
+	@cantidadGoles int,
+	@asistencias int,
+	@tRojas int,
+	@tAmarillas int
+)
+AS
+--- ===========================================
+-- Author: Geisel Venegas
+--Create Date: 13-04-25
+--Description: Modifica los datos de un usuario
+-- ============================================
+BEGIN
+
+	UPDATE ResultadosIndividuales SET 
+	idJugador=@idJugador,
+	fecha=@fecha,
+	cantidadGoles=@cantidadGoles,
+	asistencias=@asistencias,
+	tarjetasRojas=@tRojas,
+	tarjetasAmarillas=@tAmarillas
+	WHERE id=@id;
 END
